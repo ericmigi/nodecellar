@@ -7,10 +7,7 @@ var Server = mongo.Server,
 var server = new Server('localhost', 27017, {auto_reconnect: true});
 db = new Db('winedb', server, {safe: true});
 
-mongo.connect(process.env.MONGOLAB_URI, {}, dbConnectionOpen);
-
-function dbConnectionOpen(err, db) {
-    database = db;
+db.open(function(err, db) {
     if(!err) {
         console.log("Connected to 'winedb' database");
         db.collection('wines', {safe:true}, function(err, collection) {
@@ -20,7 +17,7 @@ function dbConnectionOpen(err, db) {
             }
         });
     }
-}
+});
 
 exports.findById = function(req, res) {
     var id = req.params.id;
