@@ -11,7 +11,7 @@ mongo.connect(process.env.MONGOLAB_URI, {}, dbConnectionOpen);
 function dbConnectionOpen(err, db) {
     database = db;
     if(!err) {
-        console.log("Connected to my 'winedb' database");
+        console.log("Connected to 'winedb' database");
         db.collection('wines', {safe:true}, function(err, collection) {
             if (err) {
                 console.log("The 'wines' collection doesn't exist. Creating it with sample data...");
